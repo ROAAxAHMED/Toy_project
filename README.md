@@ -72,21 +72,33 @@ Once the Docker container is running, open your web browser and navigate to http
 
 ## Deploy the server using Terraform
 
- - Create a Terraform configuration file that defines the Azure resources that you need to deploy the web app.
+- Create a Terraform configuration file that defines the Azure resources that you need to deploy the web app.
 
-- Log in to the Azure Portal and create an Azure Container Registry.
+- Push the Docker image to the Docker hub.
+- create an Azure resource group.
 
-- Pull the desired Docker image from Docker Hub and tag it with the Azure Container Registry name.
+- Create an Azure Container Instance using the image from the Docker hub.
 
-- Push the Docker image to the Azure Container Registry.
+- create a service principal for Security Considerations, you can use either the Azure portal or the Azure CLI.
 
-- Create an Azure Container Instance using the image from the Azure Container Registry.
-
-- Create an Azure Web App that uses the Container Instance as its source.
-
-- Configure the Web App to use the Container Instance as its source.
-
-- Start the Container Instance and the Web App 
+- Using the Azure portal:
+```
+-Log in to your Azure account and go to the Azure portal.
+-Navigate to the Azure Active Directory section and select App registrations.
+-Select + New registration.
+-Enter a name for your service principal and select Register.
+-Copy the Application (client) ID and the Directory (tenant) ID.
+-Select Certificates & secrets.
+-Select + New client secret and enter a Description and an Expires value.
+-Select Add.
+```
+- Using the Azure CLI:
+```
+-Log in to your Azure account via the Azure CLI.
+-Copy the appId and password keys.
+-You will need to provide the Service Principal's appId and password as arguments when running the authentication command.
+-az login --service-principal --username &#60;appId&#62; --password &#60;password&#62;
+```
 
 [Terraform files](https://github.com/ROAAxAHMED/Toy_project/tree/main/terraform)
 
